@@ -1,3 +1,7 @@
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -6,3 +10,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
+
+fetch('/api/todos').then(function(response) {
+  console.log(response.headers.get('Content-Type'))
+  console.log(response.headers.get('Date'))
+  console.log(response.status)
+  console.log(response.statusText)
+});
