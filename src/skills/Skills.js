@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
-import Rating from 'react-rating';
-import SkillSelector from './SkillSelector';
+class Skills {
 
+	skills = [{abbr:"java", name: "Java"}, {abbr:"clojure", name: "Clojure"}];
 
-class SkillList extends Component {
-
-	render () {
-		return (
-			<div>
-				<Rating />
-				<Rating />
-			</div>
-		);
+	declareNewUnknownSkill(skillName) {
+		if(this.skills.filter(declared => declared.name.toLowerCase() === skillName.toLowerCase()).length > 0) {
+			console.log("Already there");
+		}
+		else {
+			this.skills.push({abbr:skillName.toLowerCase, name:skillName});
+		}
 	}
-}
 
-class Skills extends Component {
-	render() {
-		return (
-			<div>
-				<SkillSelector/>
-				<SkillList/>
-			</div>
-		);
+	declareNewSkill(skill) {
+		console.log("New skill: ", skill);
+		if(this.skills.filter(declared => declared.abbr === skill.abbr).length > 0) {
+			console.log("Already there");
+		}
+		else {
+			this.skills.push(skill);
+		}
+	}
+
+	all() {
+		console.log("All skills: ", this.skills);
+		return this.skills;
 	}
 }
 

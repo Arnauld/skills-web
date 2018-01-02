@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import SkillsView from './skills/SkillsView'
 import Skills from './skills/Skills'
 
 
@@ -26,6 +27,7 @@ const navbarInstance = (
   </Navbar>
 );
 
+const skills = new Skills();
 
 class App extends Component {
 
@@ -33,7 +35,7 @@ class App extends Component {
     return (
       <div className="App">
         {navbarInstance}
-        <Skills/>
+        <SkillsView skills={skills}/>
       </div>
     );
   }
