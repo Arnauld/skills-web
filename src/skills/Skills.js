@@ -1,29 +1,42 @@
+const DEFAULT_RANK = 3;
 class Skills {
 
-	skills = [{abbr:"java", name: "Java"}, {abbr:"clojure", name: "Clojure"}];
+
+
+	userSkills = [
+		{abbr:"java", name: "Java", rank:5}, 
+		{abbr:"clojure", name: "Clojure", rank: 3}, 
+		{abbr:"erlang", name: "Erlang", rank: 3}, 
+		{abbr:"gwt", name: "GWT", rank: 1}
+	];
 
 	declareNewUnknownSkill(skillName) {
-		if(this.skills.filter(declared => declared.name.toLowerCase() === skillName.toLowerCase()).length > 0) {
+		if(this.userSkills.filter(declared => declared.name.toLowerCase() === skillName.toLowerCase()).length > 0) {
 			console.log("Already there");
 		}
 		else {
-			this.skills.push({abbr:skillName.toLowerCase, name:skillName});
+			this.userSkills.push({abbr:skillName.toLowerCase, name:skillName, rank:DEFAULT_RANK});
 		}
 	}
 
 	declareNewSkill(skill) {
-		console.log("New skill: ", skill);
-		if(this.skills.filter(declared => declared.abbr === skill.abbr).length > 0) {
+		if(this.userSkills.filter(declared => declared.abbr === skill.abbr).length > 0) {
 			console.log("Already there");
 		}
 		else {
-			this.skills.push(skill);
+			this.userSkills.push({...skill, rank:DEFAULT_RANK});
 		}
 	}
 
+	updateSkill(skill, rank) {
+		this.userSkills
+				.filter(declared => declared.abbr === skill.abbr)
+				.forEach(declared => declared.rank = rank);
+	}
+
 	all() {
-		console.log("All skills: ", this.skills);
-		return this.skills;
+		console.log("All skills: ", this.userSkills);
+		return [...this.userSkills].reverse();
 	}
 }
 

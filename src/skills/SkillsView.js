@@ -27,15 +27,21 @@ const SkillSelectorStyle = {
 
 class SkillList extends Component {
 
+	onSkillUpdate(skill, rank) {
+		console.log("this:", this, this.props);
+		this.props.updateSkill(skill, rank);
+	}
 
 	render () {
+		const self = this;
 		return (
 			<Grid style={SkillListStyle}>
 				{this.props.skills.map(function(skill){
             		return (
             			<Row key={skill.abbr} style={SkillRowStyle}>
             				<Col xs={6} md={4} style={SkillLabelStyle}>{skill.name}</Col>
-            				<Col xs={6} md={4} style={SkillRatingStyle}><Rating /></Col>
+            				<Col xs={6} md={4} style={SkillRatingStyle}><Rating initialRate={skill.rank} 
+            				                                                    onChange={(rate) => self.onSkillUpdate(skill, rate)}/></Col>
             			</Row>
         			);
           		})}
@@ -64,6 +70,7 @@ class SkillsView extends Component {
 	}
 
 	updateSkill(skill, rank) {
+		console.log("Update skill", skill, rank)
 		this.props.skills.updateSkill(skill, rank);
 		this.setState({skills: this.props.skills.all()});	
 	}
@@ -75,7 +82,7 @@ class SkillsView extends Component {
 						onSkillSelected={skill => this.declareNewSkill(skill)} 
 						onUnknownSkillSelected={skillName => this.declareNewUnknownSkill(skillName)}
 						inputStyle={SkillSelectorStyle}/>
-				<SkillList onChange={this.updateSkill} skills={this.state.skills}/>
+				<SkillList updateSkill={(skill, rank) => this.updateSkill(skill, rank)} skills={this.state.skills}/>
 			</div>
 		);
 	}
