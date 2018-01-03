@@ -4,10 +4,6 @@ class Skills {
 
 
 	userSkills = [
-		{abbr:"java", name: "Java", rank:5}, 
-		{abbr:"clojure", name: "Clojure", rank: 3}, 
-		{abbr:"erlang", name: "Erlang", rank: 3}, 
-		{abbr:"gwt", name: "GWT", rank: 1}
 	];
 
 	declareNewUnknownSkill(skillName) {
